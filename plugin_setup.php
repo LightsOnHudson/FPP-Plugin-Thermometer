@@ -154,6 +154,8 @@ echo "</th> \n";
 				break;
 				
 		}
+		echo "</td> \n";
+		echo "</tr> \n";
 		//echo "Temp in celcisu: ".$TEMP_IN_CELCIUS;
 		logEntry("Temp in celcius for probe: ".$temp_probe." ".$CELCIUS);
 		logEntry("Temp in farenheight for probe: ".$temp_probe." ".$FARENHEIGHT);
@@ -162,7 +164,8 @@ echo "</th> \n";
 		$message = $TEMP_IN_CELCIUS;
 		insertMessage($Plugin_DBName, $table, $message, $pluginName, $pluginData);
 		
-	}	
+	}
+	echo "</table> \n";
 	
 } else {
 	echo "There are no probes currently detected! <br/>";
