@@ -11,5 +11,5 @@ Thermometer Help Page</b>
 <li>Currently you will need to make a modification to the /boot/config.txt file. The plugin will eventually make this for you</li>
 <li>You need to visit the Thermometer page at least ONCE to have the libraries registered for the probe to be probed for data</li>
 </ul>
-<img src="TempWiring.png">
+<a href="TempWiring.png" target="_top">Image here</a>
 
