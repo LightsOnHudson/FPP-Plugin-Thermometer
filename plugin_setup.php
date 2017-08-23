@@ -145,12 +145,14 @@ echo "</th> \n";
 			case "FARENHEIGHT":
 				$FARENHEIGHT = (floatval($TEMP_IN_CELCIUS) /1000.0) * 9.0 / 5.0 + 32.0;
 				echo $FARENHEIGHT."&deg F";
+				$message = $FARENHEIGHT."&deg F";
 				break;
 				
 				
 			case "CELCIUS":
 				$CELCIUS = floatval($TEMP_IN_CELCIUS) /1000.0;
 				echo $CELCIUS."&deg C";
+				$message = $CELCIUS."&deg C";
 				break;
 				
 		}
@@ -161,7 +163,7 @@ echo "</th> \n";
 		logEntry("Temp in farenheight for probe: ".$temp_probe." ".$FARENHEIGHT);
 		$table="messages";
 		$pluginData = $temp_probe;
-		$message = $TEMP_IN_CELCIUS;
+		
 		insertMessage($Plugin_DBName, $table, $message, $pluginName, $pluginData);
 		
 	}
