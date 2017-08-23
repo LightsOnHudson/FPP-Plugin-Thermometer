@@ -71,6 +71,7 @@ $ENABLED = urldecode ( $pluginSettings ['ENABLED'] );
 
 $IMMEDIATE_OUTPUT = urldecode ( $pluginSettings ['IMMEDIATE_OUTPUT'] );
 $MATRIX_LOCATION = urldecode ( $pluginSettings ['MATRIX_LOCATION'] );
+$TEMPERATURE_OUTPUT = $pluginSettings['TEMPERATURE_OUTPUT'];
 //$CONSOLE_DEBUG = urldecode ( $pluginSettings ['CONSOLE_DEBUG'] );
 
 // $CONSOLE_DEBUG = true;
