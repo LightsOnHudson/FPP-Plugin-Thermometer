@@ -69,7 +69,7 @@ if(isset($_POST['submit']))
 //	echo "Writring config fie <br/> \n";
 	
 	
-	//WriteSettingToFile("PROFANITY_LANGUAGE",urlencode($_POST["PROFANITY_LANGUAGE"]),$pluginName);
+	WriteSettingToFile("TEMPERATURE_OUTPUT",urlencode($_POST["TEMPERATURE_OUTPUT"]),$pluginName);
 	
 }
 sleep(1);
@@ -79,7 +79,7 @@ if (file_exists($pluginConfigFile))
 
 
 $LAST_READ = $pluginSettings['LAST_READ'];
-
+$TEMPERATURE_OUTPUT = $pluginSettings['TEMPERATURE_OUTPUT'];
 
 
 $Plugin_DBName = $settings['configDirectory']."/FPP.".$pluginName.".db";
@@ -199,8 +199,40 @@ echo "<p/> \n";
 MATRIX Message Plugin Location: (IP Address. default 127.0.0.1);
 <input type="text" size="15" value="<? if($MATRIX_LOCATION !="" ) { echo $MATRIX_LOCATION; } else { echo "127.0.0.1";}?>" name="MATRIX_LOCATION" id="MATRIX_LOCATION"></input>
 <p/>
+<?
+echo "<p/> \n";
 
+echo "Temperature output (F / C): \n";
+echo "<select name=\"TEMPERATURE_OUTPUT\"> \n";
+	if($TEMPERATURE_OUTPUT !="" ) {
+		switch ($TEMPERATURE_OUTPUT)
+				{
+					case "FARENHEIGHT":
+						echo "<option selected value=\"".$TEMPERATURE_OUTPUT."\">".$TEMPERATURE_OUTPUT."</option> \n";
+                                		echo "<option value=\"CELCIUS\">CELCIUS</option> \n";
+                                		break;
+                                		
+					case "CELCIUS":
+						echo "<option selected value=\"".$TEMPERATURE_OUTPUT."\">".$TEMPERATURE_OUTPUT."</option> \n";
+                                		echo "<option value=\"FARENHEIGHT\">FARENHEIGHT</option> \n";
+                        			break;
+			
+					default:
+						echo "<option value=\"FARENHEIGHT\">FARENHEIGHT</option> \n";
+						echo "<option value=\"CELCIUS\">CELCIUS</option> \n";
+							break;
+	
+				}
+	
+			} else {
 
+                                echo "<option value=\"FARENHEIGHT\">FARENHEIGHT</option> \n";
+                                echo "<option value=\"CELCIUS\">CELCIUS</option> \n";
+			}
+               
+			echo "</select> \n";
+echo "<p/> \n";
+?>
 <p/>
 <input id="submit_button" name="submit" type="submit" class="buttons" value="Save Config">
 <?
