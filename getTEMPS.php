@@ -65,6 +65,8 @@ if (file_exists ( $pluginConfigFile ))
 
 $DEBUG = urldecode ( $pluginSettings ['DEBUG'] );
 
+logEntry("DEBUG mode: ".$DEBUG);
+
 $ENABLED = urldecode ( $pluginSettings ['ENABLED'] );
 
 $IMMEDIATE_OUTPUT = urldecode ( $pluginSettings ['IMMEDIATE_OUTPUT'] );
