@@ -141,7 +141,11 @@ if(count($paths) >0) {
 		$pluginData = $temp_probe;
 		
 		insertMessage($Plugin_DBName, $table, $message, $pluginName, $pluginData);
-		WriteSettingToFile("LAST_READ",urlencode(time ()),$pluginName);
+		
+		$pluginLatest = time();
+		//set it to one or 2 seconds back so that when it is sent it is read properly by the matrix plugin!!!
+		
+		WriteSettingToFile("LAST_READ",$pluginLatest - 5,$pluginName);
 	}
 	
 	
