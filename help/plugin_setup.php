@@ -11,5 +11,5 @@ Thermometer Help Page</b>
 <li>Currently you will need to make a modification to the /boot/config.txt file. The plugin will eventually make this for you</li>
 <li>You need to visit the Thermometer page at least ONCE to have the libraries registered for the probe to be probed for data</li>
 </ul>
-<a href="/home/fpp/media/plugins/Thermometer/help/TempWiring.png" target="_top">Image here</a>
+<a href="/plugin.php?plugin=Thermometer&page=wiring.php">
 
