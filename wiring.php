@@ -1,4 +1,4 @@
 <?php 
 
-echo "<img src=\"TempWiring.png\"> \n";
+echo "<img src=\"../../../home/fpp/media/plugins/Thermometer/TempWiring.png\"> \n";
 ?>
