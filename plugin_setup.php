@@ -107,7 +107,7 @@ exec($MOD_PROBE_CMD_2);
 $TEMPERATURE_DEVICE_PATH = "/sys/bus/w1/devices/";
 $paths = glob($TEMPERATURE_DEVICE_PATH.'28-*');
 
-print_r($paths);
+//print_r($paths);
 
 $TEMP_PROBES = array();
 //get the files in each - because apparently you can have more than one on the string!!!
@@ -127,9 +127,13 @@ foreach ($paths as $temp_probe) {
 	
 	$TEMP_IN_CELCIUS =  get_string_between ($temperature_file_parts[1],"=","\n");
 	
-	echo "Temp in celcisu: ".$TEMP_IN_CELCIUS;
+	//echo "Temp in celcisu: ".$TEMP_IN_CELCIUS;
 	logEntry("Temp in celcius for probe: ".$temp_probe." ".$TEMP_IN_CELCIUS);
 	
+	$table="messages";
+	$pluginData = $temp_probe;
+	$message = $TEMP_IN_CELCIUS;
+	insertMessage($Plugin_DBName, $table, $message, $pluginName, $pluginData);
 	
 	
 }
