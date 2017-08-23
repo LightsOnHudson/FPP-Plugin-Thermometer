@@ -70,7 +70,7 @@ if(isset($_POST['submit']))
 	
 	
 	WriteSettingToFile("TEMPERATURE_OUTPUT",urlencode($_POST["TEMPERATURE_OUTPUT"]),$pluginName);
-	
+	WriteSettingToFile("MATRIX_LOCATION",urlencode($_POST["MATRIX_LOCATION"]),$pluginName);
 }
 sleep(1);
 $pluginConfigFile = $settings['configDirectory'] . "/plugin." .$pluginName;
