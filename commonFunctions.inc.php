@@ -4,27 +4,6 @@
 function do_nothing($curl, $input) {
 	return 0; // aborts transfer with an error
 }
-//send response function
-function sendResponse($from,$REPLY_TEXT,$GMAIL_ADDRESS,$subject) {
-	global $DEBUG, $gv, $EMAIL, $RESPONSE_METHOD;
-
-	logEntry("Sending response using: ".$RESPONSE_METHOD);
-
-	switch ($RESPONSE_METHOD) {
-
-		case "SMS":
-			$gv->sendSMS($from,$REPLY_TEXT);
-				
-			break;
-				
-		case "EMAIL":
-			sendMail($GMAIL_ADDRESS, $EMAIL, $subject, $REPLY_TEXT);
-			break;
-	}
-
-
-
-}
 //sendmail using phpmailer function
 function sendMail($to, $from, $subject, $body) {
 	global $DEBUG, $EMAIL, $PASSWORD;

@@ -91,7 +91,23 @@ $db = new SQLite3($Plugin_DBName) or die('Unable to open database');
 //create the default tables if they do not exist!
 createThermometerTables($db);
 
-	
+//modprobe to ensure that it is there
+//also add to /boot/config.txt  dtoverlay=w1-gpio and reboot
+
+$MOD_PROBE_CMD_1 = "/sbin/modprobe w1-gpio";
+
+exec($MOD_PROBE_CMD_1);
+sleep(1);
+
+$MOD_PROBE_CMD_2 = "/sbin/modprobe w1-therm";
+exec($MOD_PROBE_CMD_2);
+
+//now read in the file
+//Temp file can be found in /sys/bus/w1/devices/28-*
+$TEMPERATURE_DEVICE_PATH = "/sys/bus/w1/devices/";
+$paths = glob($TEMPERATURE_DEVICE_PATH.'28-*');
+
+print_r($paths);
 ?>
 
 <html>
@@ -155,7 +171,7 @@ MATRIX Message Plugin Location: (IP Address. default 127.0.0.1);
 <input type="text" size="15" value="<? if($MATRIX_LOCATION !="" ) { echo $MATRIX_LOCATION; } else { echo "127.0.0.1";}?>" name="MATRIX_LOCATION" id="MATRIX_LOCATION"></input>
 <p/>
 
-?>
+
 <p/>
 <input id="submit_button" name="submit" type="submit" class="buttons" value="Save Config">
 <?
