@@ -110,32 +110,63 @@ $paths = glob($TEMPERATURE_DEVICE_PATH.'28-*');
 //print_r($paths);
 
 $TEMP_PROBES = array();
+
+if(count($paths) >0) {
+	//we have some probes!!!
+
+echo "<table border=\"1\" cellspacing=\"3\" cellpadding=\"3\"> \n";
+echo "<th colspan=\"3\"> \n";
+echo "Temperature probes \n";
+echo "</th> \n";
 //get the files in each - because apparently you can have more than one on the string!!!
-foreach ($paths as $temp_probe) {
+	foreach ($paths as $temp_probe) {
+		
+		echo "<tr> \n";
+		echo "<td> \n";
+		//read the contents of the file w1_slave in each of the folders
+		$TEMPERATURE_FILE_PATH = $temp_probe . "/w1_slave";
+		
+		$temperature_file_contents = file_get_contents($TEMPERATURE_FILE_PATH);
+		
+		$temperature_file_parts = explode("\n",$temperature_file_contents);
+		
+		//the temperature information is on the second line t= in celcius
+		//example:
+		//d5 01 4b 46 7f ff 0c 10 2c : crc=2c YES
+		//d5 01 4b 46 7f ff 0c 10 2c t=29312
+		
+		$TEMP_IN_CELCIUS =  get_string_between ($temperature_file_parts[1],"=","\n");
+		echo "Probe: ".basename($temp_probe).PHP_EOL;
+		echo "</td> \n";
+		echo "<td> \n";
+		
+		switch($TEMPERATURE_OUTPUT) {
+			
+			case "FARENHEIGHT":
+				$FARENHEIGHT = (float($TEMP_IN_CELCIUS) /1000.0) * 9.0 / 5.0 + 32.0;
+				echo $FARENHEIGHT."&deg F";
+				break;
+				
+				
+			case "CELCIUS":
+				$CELCIUS = float($TEMP_IN_CELCIUS) /1000.0;
+				echo $CELCIUS."&deg C";
+				break;
+				
+		}
+		//echo "Temp in celcisu: ".$TEMP_IN_CELCIUS;
+		logEntry("Temp in celcius for probe: ".$temp_probe." ".$CELCIUS);
+		logEntry("Temp in farenheight for probe: ".$temp_probe." ".$FARENHEIGHT);
+		$table="messages";
+		$pluginData = $temp_probe;
+		$message = $TEMP_IN_CELCIUS;
+		insertMessage($Plugin_DBName, $table, $message, $pluginName, $pluginData);
+		
+	}	
 	
-	//read the contents of the file w1_slave in each of the folders
-	$TEMPERATURE_FILE_PATH = $temp_probe . "/w1_slave";
-	
-	$temperature_file_contents = file_get_contents($TEMPERATURE_FILE_PATH);
-	
-	$temperature_file_parts = explode("\n",$temperature_file_contents);
-	
-	//the temperature information is on the second line t= in celcius
-	//example:
-	//d5 01 4b 46 7f ff 0c 10 2c : crc=2c YES
-	//d5 01 4b 46 7f ff 0c 10 2c t=29312
-	
-	$TEMP_IN_CELCIUS =  get_string_between ($temperature_file_parts[1],"=","\n");
-	
-	//echo "Temp in celcisu: ".$TEMP_IN_CELCIUS;
-	logEntry("Temp in celcius for probe: ".$temp_probe." ".$TEMP_IN_CELCIUS);
-	
-	$table="messages";
-	$pluginData = $temp_probe;
-	$message = $TEMP_IN_CELCIUS;
-	insertMessage($Plugin_DBName, $table, $message, $pluginName, $pluginData);
-	
-	
+} else {
+	echo "There are no probes currently detected! <br/>";
+
 }
 ?>
 
