@@ -121,6 +121,7 @@ if(count($paths) >0) {
 			
 			case "FARENHEIGHT":
 				$FARENHEIGHT = (floatval($TEMP_IN_CELCIUS) /1000.0) * 9.0 / 5.0 + 32.0;
+				$FARENHEIGHT = round($FARENHEIGHT,2);
 				echo $FARENHEIGHT."&deg F";
 				$message = $FARENHEIGHT."&deg F";
 				break;
@@ -128,6 +129,7 @@ if(count($paths) >0) {
 				
 			case "CELCIUS":
 				$CELCIUS = floatval($TEMP_IN_CELCIUS) /1000.0;
+				$CELCIUS= round($CELCIUS,2);
 				echo $CELCIUS."&deg C";
 				$message = $CELCIUS."&deg C";
 				break;
