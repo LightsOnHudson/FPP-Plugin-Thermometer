@@ -165,7 +165,7 @@ echo "</th> \n";
 		$pluginData = $temp_probe;
 		
 		insertMessage($Plugin_DBName, $table, $message, $pluginName, $pluginData);
-		
+		WriteSettingToFile("LAST_READ",urlencode(time ()),$pluginName);
 	}
 	echo "</table> \n";
 	
