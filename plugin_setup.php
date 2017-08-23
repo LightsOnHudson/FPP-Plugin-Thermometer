@@ -143,13 +143,13 @@ echo "</th> \n";
 		switch($TEMPERATURE_OUTPUT) {
 			
 			case "FARENHEIGHT":
-				$FARENHEIGHT = (float($TEMP_IN_CELCIUS) /1000.0) * 9.0 / 5.0 + 32.0;
+				$FARENHEIGHT = (floatval($TEMP_IN_CELCIUS) /1000.0) * 9.0 / 5.0 + 32.0;
 				echo $FARENHEIGHT."&deg F";
 				break;
 				
 				
 			case "CELCIUS":
-				$CELCIUS = float($TEMP_IN_CELCIUS) /1000.0;
+				$CELCIUS = floatval($TEMP_IN_CELCIUS) /1000.0;
 				echo $CELCIUS."&deg C";
 				break;
 				
