@@ -108,6 +108,31 @@ $TEMPERATURE_DEVICE_PATH = "/sys/bus/w1/devices/";
 $paths = glob($TEMPERATURE_DEVICE_PATH.'28-*');
 
 print_r($paths);
+
+$TEMP_PROBES = array();
+//get the files in each - because apparently you can have more than one on the string!!!
+foreach ($paths as $temp_probe) {
+	
+	//read the contents of the file w1_slave in each of the folders
+	$TEMPERATURE_FILE_PATH = $temp_probe . "/w1_slave";
+	
+	$temperature_file_contents = file_get_contents($TEMPERATURE_FILE_PATH);
+	
+	$temperature_file_parts = explode("\n",$temperature_file_contents);
+	
+	//the temperature information is on the second line t= in celcius
+	//example:
+	//d5 01 4b 46 7f ff 0c 10 2c : crc=2c YES
+	//d5 01 4b 46 7f ff 0c 10 2c t=29312
+	
+	$TEMP_IN_CELCIUS =  get_string_between ($temperature_file_parts[1],"=","\n");
+	
+	echo "Temp in celcisu: ".$TEMP_IN_CELCIUS;
+	logEntry("Temp in celcius for probe: ".$temp_probe." ".$TEMP_IN_CELCIUS);
+	
+	
+	
+}
 ?>
 
 <html>
